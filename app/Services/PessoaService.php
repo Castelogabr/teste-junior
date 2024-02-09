@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-
 use App\Repositories\PessoaRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
@@ -19,8 +18,21 @@ class PessoaService implements PessoaServiceInterface
         $this->pessoaRepo = $pessoaRepository;
     }
 
-    /**
-     * @inheritDoc
+     /**
+     * Retorna todas as pessoas.
+     *
+     * @return Collection|null
+     */
+    public function all(): Collection
+    {
+        return $this->pessoaRepo->all();
+    }
+
+   /**
+     * Busca uma pessoa pelo ID.
+     *
+     * @param int $id
+     * @return Model|null
      */
     public function find(int $id): ?Model
     {
@@ -28,35 +40,37 @@ class PessoaService implements PessoaServiceInterface
     }
 
     /**
-     * @inheritDoc
-     */
-    public function all(): ?Collection
-    {
-        // TODO: Implement all() method.
-    }
-
-    /**
-     * @inheritDoc
+     * Cria uma nova pessoa com os dados fornecidos.
+     *
+     * @param array $data
+     * @return Model|null
      */
     public function create(array $data): ?Model
     {
-        $var = 10 / 0;
         return $this->pessoaRepo->create($data);
     }
 
     /**
-     * @inheritDoc
-     */
-    public function delete(int $id): ?bool
-    {
-        // TODO: Implement delete() method.
-    }
-
-    /**
-     * @inheritDoc
+     * Atualiza os dados de uma pessoa pelo ID.
+     *
+     * @param array $data
+     * @param int $id
+     * @return Model|null
      */
     public function update(array $data, int $id): ?Model
     {
-        // TODO: Implement update() method.
+        return $this->pessoaRepo->update($data, $id);
     }
+
+    /**
+     * Deleta uma pessoa pelo ID.
+     *
+     * @param int $id
+     * @return bool|null
+     */
+    public function delete(int $id): ?bool
+    {
+        return $this->pessoaRepo->delete($id);
+    }
+    
 }

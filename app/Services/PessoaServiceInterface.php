@@ -16,7 +16,7 @@ interface PessoaServiceInterface
     /**
      * @return Collection|null
      */
-    public function all(): ?Collection;
+    public function all(): Collection;
 
     /**
      * @param array $data

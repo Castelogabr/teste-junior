@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Repositories\PessoaRepository;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Validator;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(\App\Services\PessoaServiceInterface::class, \App\Services\PessoaService::class);
+        $this->app->bind(PessoaRepository::class, function ($app) {
+            return new PessoaRepository();
+        });
     }
 
     /**
@@ -23,7 +28,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app->register(TaskServiceProvider::class);
-        $this->app->register(RepositoryServiceProvider::class);
     }
 }
